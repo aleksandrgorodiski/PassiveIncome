@@ -17,7 +17,7 @@ MonoBehaviour:
   spriteID: 0
   localizationKey: currency_cash
   playerPrefsKey: cash
-  defaultAmount: 0
+  defaultAmount: 1
   pieces: 1
   nominal: 1
   destroyByTime: 1

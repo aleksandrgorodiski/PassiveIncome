@@ -9,7 +9,8 @@ public class GameController : GameElement
     public BalanceController balanceController;
     public EffectController effectController;
 
-    private void OnEnable()
+
+    private void Awake()
     {
         balanceController.LoadBalance();
     }
@@ -18,6 +19,16 @@ public class GameController : GameElement
     {
 
     }
+
+
+
+
+
+
+
+
+
+
 
     void FireEffect(CurrencyConfig _config, int _pieces, Vector3 _effectPosition)
     {
