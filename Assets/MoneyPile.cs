@@ -6,59 +6,90 @@ using Random = UnityEngine.Random;
 
 public class MoneyPile : GameElement
 {
+    public CurrencyModel currencyModel;
+
     public int piecesCountX = 5;
     public int piecesCountZ = 5;
     public float pieceSizeX = 1f;
     public float pieceSizeY = 1f;
     public float pieceSizeZ = 1f;
+
     public float offsetX = 0.1f;
     public float offsetY = 0.1f;
     public float offsetZ = 0.1f;
+
     public GameObject packPrefab;
     public List<GameObject> moneyPacks = new List<GameObject>();
 
-    //public ulong income;
-    public ulong incomePerMonth;
-    public ulong dollarsInOnePack;
-    public float currentIncome;
+    [Header("Длина единицы времени(сек)")]
+    public float timeUnitLength;
     public float _time;
+
+    [Header("Долларов в пачке")]
+    public long dollarsInOnePack = 10000;
+
+    [Header("Доходы")]
+    public long incomePerMonth = 1000;
+
+    [Header("Расходы")]
+    public long expensesPerMonth = 1000;
+
+    public float _packsCountFloat;
+    public long _packsCount;
+    public long _packsCountAbsolute;
+
+    [Header("Текущий баланс")]
+    public long _currentBalance;
+    public long CurrentBalance
+    {
+        get => _currentBalance = Convert.ToInt64(PlayerPrefs.GetString(GetPlayerPrefsKey(), "0"));
+        set
+        {
+            if (_currentBalance == value) return;
+            _currentBalance = value;
+            PlayerPrefs.SetString(GetPlayerPrefsKey(), Convert.ToString(_currentBalance));
+            //Debug.Log("CurrencyModel. Amount: " + GetID() + ". Prev: " + _prevValue + " New: " + _amount);
+        }
+    }
 
     private void Start()
     {
         MoneyPackOnStart();
-        //TestTruncate();
     }
-
-    //ulong Income()
-    //{
-    //    return app.model.balanceModel.cashModel.Amount;
-    //}
 
     private void Update()
     {
         _time += Time.deltaTime;
-        if (_time >= 1f)
+        if (_time >= timeUnitLength)
         {
             _time = 0f;
-            currentIncome = currentIncome + incomePerMonth;
+            long _lastMonthBalance = incomePerMonth - expensesPerMonth;
+            CurrentBalance += _lastMonthBalance;
 
-            app.model.balanceModel.cashModel.Amount += incomePerMonth;
+            app.model.balanceModel.savingsModel.Amount += _lastMonthBalance;
 
-            float _value = currentIncome / dollarsInOnePack;
-            ulong _packsCount = (ulong)(_value);
+            _packsCountFloat =(float)CurrentBalance / (float)dollarsInOnePack;
+            _packsCount = (long)(_packsCountFloat);
+            _packsCountAbsolute = (long)(Mathf.Abs(_packsCount));
 
-            Debug.LogError("Packs Count: " + _packsCount);
-            
-            if (_packsCount > 0)
+            if (_packsCount != 0)
             {
-                AddMoneyPack(_packsCount);
-                currentIncome = currentIncome - (_packsCount * dollarsInOnePack);
+                if (_packsCount > 0)
+                {
+                    AddMoneyPack(_packsCountAbsolute);
+                }
+                else if (_packsCount < 0)
+                {
+                    RemoveMoneyPack(_packsCountAbsolute);
+                }
+                CurrentBalance = CurrentBalance - (_packsCount * dollarsInOnePack);
+                _packsCountFloat = 0f;
                 _packsCount = 0;
+                _packsCountAbsolute = 0;
             }
+
         }
     }
-
-
 
     Vector3 FirstPlacePos()
     {
@@ -68,19 +99,27 @@ public class MoneyPile : GameElement
 
     void MoneyPackOnStart()
     {
-        float _value = app.model.balanceModel.cashModel.Amount / dollarsInOnePack;
-        ulong _packsCount = (ulong)(_value);
-        Debug.LogError("Packs Count On Start: " + _packsCount);
+        float _packsCountFloat = (float) app.model.balanceModel.savingsModel.Amount / (float)dollarsInOnePack;
+        Debug.LogError("Packs Count On Start: " + _packsCountFloat);
 
-        currentIncome = app.model.balanceModel.cashModel.Amount - (_packsCount * dollarsInOnePack);
-        Debug.LogError("Current Income On Start: " + currentIncome);
+        long _packsCountLond = (long)(_packsCountFloat);
+        Debug.LogError("Packs Count On Start: " + _packsCountLond);
 
-        AddMoneyPack(_packsCount);
+        Debug.LogError("Current Balance On Start: " + CurrentBalance);
+
+        AddMoneyPack(_packsCountLond);
     }
 
-    public void AddMoneyPack(ulong _count)
+
+
+    public string GetPlayerPrefsKey()
     {
-        for (ulong i = 0; i < _count; i++)
+        return "CurrentBalance";
+    }
+
+    public void AddMoneyPack(long _count)
+    {
+        for (long i = 0; i < _count; i++)
         {
             int _moneyCount = moneyPacks.Count;
             GameObject _pack = Instantiate(packPrefab);
@@ -89,7 +128,7 @@ public class MoneyPile : GameElement
         }
     }
 
-    public void RemoveCash()
+    public void RemoveMoneyPack(long _count)
     {
         int _last = moneyPacks.Count;
         if (_last > 0)
@@ -145,11 +184,6 @@ public class MoneyPile : GameElement
 
 
 
-
-
-
-
-
     //public void TestTruncate()
     //{
     //    float[] numbers = { 1.499f, 1.999f, 2f, 2.15f, 2.55f };
@@ -162,55 +196,6 @@ public class MoneyPile : GameElement
     //        int floor = Mathf.FloorToInt(value);
     //        int ceil = Mathf.CeilToInt(value);
     //        Debug.Log($"{i}   :   {value}     \t     {truncate}     \t     {cast}     \t     {floor}     \t     {ceil}");
-    //    }
-    //}
-
-
-
-
-
-
-
-
-
-    //public void Places()
-    //{
-    //    _places.Clear();
-
-    //    float _direction = 1f;
-
-    //    float _xPos = 0f, _yPos = 0f, _zPos = 0f, _Zdirection = pieceSizeZ;
-    //    Vector3 _position = FirstPlacePos();
-
-    //    for (int i = 0; i < pieces; i++)
-    //    {
-    //        if (i != 0 && i % piecesInRow == 0)
-    //        {
-    //            _zPos = _zPos + _Zdirection;
-    //            _xPos = _xPos - _direction;
-    //            _direction = -_direction;
-    //        }
-    //        else
-    //        {
-    //            _zPos = 0f;
-    //            if (i == 0) _xPos = 0f;
-    //            else _xPos = _direction;
-    //        }
-    //        _yPos = 0f;
-    //        if (i != 0 && i % piecesInFloor == 0)
-    //        {
-    //            Debug.LogError("Next Floor");
-    //            _yPos = _yPos + pieceSizeY;
-    //            _position.x = 0f;
-    //            _position.z = 0f;
-    //            _xPos = FirstPlacePos().x;
-    //            _zPos = FirstPlacePos().z;
-    //        }
-
-    //        _position = _position + new Vector3(_xPos, _yPos, _zPos);
-    //        Vector3 _posOut = new Vector3(_position.x + Random.Range(-unitOffsetX, unitOffsetX), _position.y, _position.z + Random.Range(-unitOffsetZ, unitOffsetZ));
-    //        Instantiate(packPrefab).transform.position = _posOut;
-    //        _places.Add(_posOut);
     //    }
     //}
 }

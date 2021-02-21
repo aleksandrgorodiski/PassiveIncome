@@ -6,4 +6,5 @@ public class BalanceHud : MonoBehaviour
 {
     public TextMeshProUGUI cashIconText;
     public TextMeshProUGUI cashText;
+    public TextMeshProUGUI inomePerTimeText;
 }

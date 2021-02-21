@@ -40,11 +40,11 @@ namespace Utilities
             return _mos;
         }
 
-        public static string UlongToString(ulong cash, string prefix = "")
+        public static string LongToString(long cash, string prefix = "")
         {
             string[] suffixes = { "", "k", "m", "b" };
             int suffixIndex;
-            if (cash == 0)
+            if (cash <= 0)
                 suffixIndex = 0;    // log10 of 0 is not valid
             else
                 suffixIndex = (int)(Mathf.Log10(cash) / 3); // get number of digits and divide by 3

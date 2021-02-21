@@ -13,11 +13,6 @@ public class CurrencyConfig : ScriptableObject
     public string localizationKey;
     public string playerPrefsKey;
     public string defaultAmount;
-    [Header("Pieces to be spawned")]
-    public int pieces;
-    [Header("Nominal per piece")]
-    public int nominal;
-    public bool destroyByTime;
 }
 
 

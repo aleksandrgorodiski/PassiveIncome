@@ -108,6 +108,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1566045235802764555}
+  - component: {fileID: -536209939397229305}
   m_Layer: 0
   m_Name: Cash
   m_TagString: Currency
@@ -131,6 +132,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-536209939397229305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5489368978027399354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52bc3442428530d4b9bc6e5868c4c7cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  positionY: 1.5
+  _scaleEnd: {x: 1.2, y: 0.2, z: 1.1}
+  _speedTransform: 0.1
+  _speedScaleIn: 0.05
+  _speedScaleOut: 0.15
+  _amplitudeScaleOut: 3
 --- !u!1 &5578347266254174821
 GameObject:
   m_ObjectHideFlags: 0

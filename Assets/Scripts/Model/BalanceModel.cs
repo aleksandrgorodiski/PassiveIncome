@@ -4,6 +4,7 @@ using System;
 [Serializable]
 public class BalanceModel
 {
-    [Header("Cash Model")]
-    public CurrencyModel cashModel;
+
+    [Header("Savings Model")]
+    public CurrencyModel savingsModel;
 }

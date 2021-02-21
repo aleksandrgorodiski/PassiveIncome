@@ -57,7 +57,7 @@ public class EffectController : MonoBehaviour
 
         rb.AddForceAtPosition(force, transform.position, ForceMode.Impulse);
 
-        if (_config.destroyByTime) Destroy(_item, 5f);
+        //if (_config.destroyByTime) Destroy(_item, 5f);
     }
 
     float GetRandomAngle()

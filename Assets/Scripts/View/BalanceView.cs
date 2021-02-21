@@ -12,31 +12,35 @@ public class BalanceView : GameElement
 
     public BalanceHud balanceHud;
 
-
     private void Awake()
     {
-        _balanceModel.cashModel.ON_AMOUNT_CHANGE += OnCashChange;
+        _balanceModel.savingsModel.ON_AMOUNT_CHANGE += OnCashChange;
     }
 
     void Start()
     {
-        SetText(balanceHud.cashText, balanceHud.cashIconText, _balanceModel.cashModel.Amount);
-        SetIcon(balanceHud.cashIconText, _balanceModel.cashModel.GetSpriteID());
+        SetText(balanceHud.cashText, balanceHud.cashIconText, _balanceModel.savingsModel.Amount);
+        SetIcon(balanceHud.cashIconText, _balanceModel.savingsModel.GetSpriteID());
+    }
+
+    private void Update()
+    {
+
     }
 
     private void OnDestroy()
     {
-        _balanceModel.cashModel.ON_AMOUNT_CHANGE -= OnCashChange;
+        _balanceModel.savingsModel.ON_AMOUNT_CHANGE -= OnCashChange;
     }
 
-    void OnCashChange(ulong prevValue, ulong newValue)
+    void OnCashChange(long prevValue, long newValue)
     {
         StartCoroutine(CountTo(balanceHud.cashText, balanceHud.cashIconText, prevValue, newValue));
     }
 
-    void SetText(TextMeshProUGUI _text, TextMeshProUGUI _icon, ulong value)
+    void SetText(TextMeshProUGUI _text, TextMeshProUGUI _icon, long value)
     {
-        _text.text = MathUtil.UlongToString(value, "");
+        _text.text = MathUtil.LongToString(value, "");
     }
 
     void SetIcon(TextMeshProUGUI _text, int _ID)
@@ -44,15 +48,15 @@ public class BalanceView : GameElement
         _text.text = "<sprite=" + _ID + ">";
     }
 
-    IEnumerator CountTo(TextMeshProUGUI text, TextMeshProUGUI iconText, ulong prevValue, ulong newValue)
+    IEnumerator CountTo(TextMeshProUGUI text, TextMeshProUGUI iconText, long prevValue, long newValue)
     {
-        ulong start = prevValue;
-        ulong score;
-        float duration = 0.25f;
+        long start = prevValue;
+        long score;
+        float duration = 0.2f;
         for (float timer = 0; timer < duration; timer += Time.deltaTime)
         {
             float progress = timer / duration;
-            score = (ulong)Mathf.Lerp(start, newValue, progress);
+            score = (long)Mathf.Lerp(start, newValue, progress);
             SetText(text, iconText, score);
             yield return null;
         }

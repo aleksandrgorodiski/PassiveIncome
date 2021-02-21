@@ -10,14 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7ee51e5e25164a61b2da799d292621c, type: 3}
-  m_Name: Cash
+  m_Name: Savings
   m_EditorClassIdentifier: 
   skin: {fileID: 5489368978027399354, guid: 2892b318be5de4618b5cf27c9cbf76b0, type: 3}
-  ID: cash
+  ID: savings
   spriteID: 0
-  localizationKey: currency_cash
-  playerPrefsKey: cash
-  defaultAmount: 1
-  pieces: 1
-  nominal: 1
-  destroyByTime: 1
+  localizationKey: currency_savings
+  playerPrefsKey: savings
+  defaultAmount: 10000

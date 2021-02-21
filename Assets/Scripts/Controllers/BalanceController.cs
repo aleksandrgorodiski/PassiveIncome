@@ -8,6 +8,11 @@ public class BalanceController: GameElement
         get => app.model.balanceModel;
     }
 
+    public void LoadBalance()
+    {
+        _balanceModel.savingsModel.LoadCurrency();
+    }
+
     //public void AddCurrency(CurrencyModel currencyModel)
     //{
     //    ulong _amount = currencyModel.Amount;
@@ -16,12 +21,12 @@ public class BalanceController: GameElement
     //    currencyModel.Amount = _newAmount;
     //}
 
-    public void AddCurrency(ulong _plusValue)
+    public void AddSavings(long _plusValue)
     {
-        ulong _amount = _balanceModel.cashModel.Amount;
-        ulong _value = _plusValue;
-        ulong _newAmount = _amount + _value;
-        _balanceModel.cashModel.Amount = _newAmount;
+        long _amount = _balanceModel.savingsModel.Amount;
+        long _value = _plusValue;
+        long _newAmount = _amount + _value;
+        _balanceModel.savingsModel.Amount = _newAmount;
     }
 
     //public void MinusCurrency(CurrencyModel currencyModel, ulong _minusValue)
@@ -32,8 +37,5 @@ public class BalanceController: GameElement
     //    currencyModel.Amount = _newAmount;
     //}
 
-    public void LoadBalance()
-    {
-        _balanceModel.cashModel.LoadCurrency();
-    }
+
 }
