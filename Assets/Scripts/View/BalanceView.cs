@@ -14,28 +14,48 @@ public class BalanceView : GameElement
 
     private void Awake()
     {
-        _balanceModel.savingsModel.ON_AMOUNT_CHANGE += OnCashChange;
+        _balanceModel.savings.ON_AMOUNT_CHANGE += OnSavingsChange;
+        _balanceModel.incomePerMonth.ON_AMOUNT_CHANGE += OnIncomePerMonthChange;
+        _balanceModel.expensesPerMonth.ON_AMOUNT_CHANGE += OnExpensesPerMonthChange;
+        _balanceModel.profit.ON_AMOUNT_CHANGE += OnProfitChange;
     }
 
     void Start()
     {
-        SetText(balanceHud.cashText, balanceHud.cashIconText, _balanceModel.savingsModel.Amount);
-        SetIcon(balanceHud.cashIconText, _balanceModel.savingsModel.GetSpriteID());
-    }
+        SetIcon(balanceHud.savingsIconText, _balanceModel.savings.GetSpriteID());
+        SetIcon(balanceHud.incomeIconText, _balanceModel.incomePerMonth.GetSpriteID());
+        SetIcon(balanceHud.expensesIconText, _balanceModel.expensesPerMonth.GetSpriteID());
+        SetIcon(balanceHud.profitIconText, _balanceModel.profit.GetSpriteID());
 
-    private void Update()
-    {
-
+        SetText(balanceHud.savingsText, balanceHud.savingsIconText, _balanceModel.savings.Amount);
+        SetText(balanceHud.incomeText, balanceHud.incomeIconText, _balanceModel.incomePerMonth.Amount);
+        SetText(balanceHud.expensesText, balanceHud.expensesIconText, _balanceModel.expensesPerMonth.Amount);
+        SetText(balanceHud.profitText, balanceHud.profitIconText, _balanceModel.profit.Amount);
     }
 
     private void OnDestroy()
     {
-        _balanceModel.savingsModel.ON_AMOUNT_CHANGE -= OnCashChange;
+        _balanceModel.savings.ON_AMOUNT_CHANGE -= OnSavingsChange;
+        _balanceModel.incomePerMonth.ON_AMOUNT_CHANGE -= OnIncomePerMonthChange;
+        _balanceModel.expensesPerMonth.ON_AMOUNT_CHANGE -= OnExpensesPerMonthChange;
+        _balanceModel.profit.ON_AMOUNT_CHANGE -= OnProfitChange;
     }
 
-    void OnCashChange(long prevValue, long newValue)
+    void OnSavingsChange(long prevValue, long newValue)
     {
-        StartCoroutine(CountTo(balanceHud.cashText, balanceHud.cashIconText, prevValue, newValue));
+        StartCoroutine(CountTo(balanceHud.savingsText, balanceHud.savingsIconText, prevValue, newValue));
+    }
+    void OnIncomePerMonthChange(long prevValue, long newValue)
+    {
+        StartCoroutine(CountTo(balanceHud.incomeText, balanceHud.incomeIconText, prevValue, newValue));
+    }
+    void OnExpensesPerMonthChange(long prevValue, long newValue)
+    {
+        StartCoroutine(CountTo(balanceHud.expensesText, balanceHud.expensesIconText, prevValue, newValue));
+    }
+    void OnProfitChange(long prevValue, long newValue)
+    {
+        StartCoroutine(CountTo(balanceHud.profitText, balanceHud.profitIconText, prevValue, newValue));
     }
 
     void SetText(TextMeshProUGUI _text, TextMeshProUGUI _icon, long value)

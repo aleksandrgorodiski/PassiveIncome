@@ -10,6 +10,7 @@ public class MoneyPile : GameElement
 
     public int piecesCountX = 5;
     public int piecesCountZ = 5;
+
     public float pieceSizeX = 1f;
     public float pieceSizeY = 1f;
     public float pieceSizeZ = 1f;
@@ -59,37 +60,36 @@ public class MoneyPile : GameElement
 
     private void Update()
     {
-        _time += Time.deltaTime;
-        if (_time >= timeUnitLength)
-        {
-            _time = 0f;
-            long _lastMonthBalance = incomePerMonth - expensesPerMonth;
-            CurrentBalance += _lastMonthBalance;
-
-            app.model.balanceModel.savingsModel.Amount += _lastMonthBalance;
-
-            _packsCountFloat =(float)CurrentBalance / (float)dollarsInOnePack;
-            _packsCount = (long)(_packsCountFloat);
-            _packsCountAbsolute = (long)(Mathf.Abs(_packsCount));
-
-            if (_packsCount != 0)
-            {
-                if (_packsCount > 0)
-                {
-                    AddMoneyPack(_packsCountAbsolute);
-                }
-                else if (_packsCount < 0)
-                {
-                    RemoveMoneyPack(_packsCountAbsolute);
-                }
-                CurrentBalance = CurrentBalance - (_packsCount * dollarsInOnePack);
-                _packsCountFloat = 0f;
-                _packsCount = 0;
-                _packsCountAbsolute = 0;
-            }
-
-        }
+        //_time += Time.deltaTime;
+        //if (_time >= timeUnitLength)
+        //{
+        //    _time = 0f;
+        //    long _lastMonthBalance = incomePerMonth - expensesPerMonth;
+        //    app.model.balanceModel.savings.Amount += _lastMonthBalance;
+        //    CurrentBalance += _lastMonthBalance;
+        //    _packsCountFloat = (float)CurrentBalance / (float)dollarsInOnePack;
+        //    _packsCount = (long)(_packsCountFloat);
+        //    _packsCountAbsolute = (long)(Mathf.Abs(_packsCount));
+        //    if (_packsCount != 0)
+        //    {
+        //        if (_packsCount > 0)
+        //        {
+        //            AddMoneyPack(_packsCountAbsolute);
+        //        }
+        //        else if (_packsCount < 0)
+        //        {
+        //            RemoveMoneyPack(_packsCountAbsolute);
+        //        }
+        //        CurrentBalance = CurrentBalance - (_packsCount * dollarsInOnePack);
+        //        _packsCountFloat = 0f;
+        //        _packsCount = 0;
+        //        _packsCountAbsolute = 0;
+        //    }
+        //}
     }
+
+
+
 
     Vector3 FirstPlacePos()
     {
@@ -99,7 +99,7 @@ public class MoneyPile : GameElement
 
     void MoneyPackOnStart()
     {
-        float _packsCountFloat = (float) app.model.balanceModel.savingsModel.Amount / (float)dollarsInOnePack;
+        float _packsCountFloat = (float) app.model.balanceModel.savings.Amount / (float)dollarsInOnePack;
         Debug.LogError("Packs Count On Start: " + _packsCountFloat);
 
         long _packsCountLond = (long)(_packsCountFloat);

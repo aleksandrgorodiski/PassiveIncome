@@ -9,11 +9,11 @@ public class GameView : GameElement
 
     private void Start()
     {
-        SetLevelText();
+        //SetLevelText();
     }
 
     void SetLevelText()
     {
-        gameHud.levelText.text = "Level: ";
+        //gameHud.levelText.text = "Level: ";
     }
 }

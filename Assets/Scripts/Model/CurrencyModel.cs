@@ -10,14 +10,6 @@ public class CurrencyModel
 {
     public event Action<long, long> ON_AMOUNT_CHANGE;
 
-    //public int GetNominal()
-    //{
-    //    return Config.nominal;
-    //}
-    //public int GetPieces()
-    //{
-    //    return Config.pieces;
-    //}
     public string GetDefaultAmount()
     {
         return Config.defaultAmount;
@@ -30,14 +22,14 @@ public class CurrencyModel
     {
         return Config.spriteID;
     }
-    public string GetPlayerPrefsKey()
-    {
-        return Config.playerPrefsKey;
-    }
-    public GameObject GetSkin()
-    {
-        return Config.skin;
-    }
+    //public string GetPlayerPrefsKey()
+    //{
+    //    return Config.playerPrefsKey;
+    //}
+    //public GameObject GetSkin()
+    //{
+    //    return Config.skin;
+    //}
 
     public bool CanBuyWithCurrency(long _cost)
     {
@@ -55,9 +47,13 @@ public class CurrencyModel
         {
             if (_amount == value) return;
             long _prevValue = _amount;
-            _amount = value;
+
+            if (value > 0) _amount = value;
+            else _amount = 0;
+
             ON_AMOUNT_CHANGE?.Invoke(_prevValue, _amount);
-            SaveCurrency(_amount);
+            Save(_amount);
+
             //Debug.Log("CurrencyModel. Amount: " + GetID() + ". Prev: " + _prevValue + " New: " + _amount);
         }
     }
@@ -74,15 +70,15 @@ public class CurrencyModel
         }
     }
 
-    public void LoadCurrency()
+    public void Load()
     {
-        Amount = Convert.ToInt64(PlayerPrefs.GetString(GetPlayerPrefsKey(), GetDefaultAmount()));
+        Amount = Convert.ToInt64(PlayerPrefs.GetString(GetID(), GetDefaultAmount()));
         //Debug.Log("BalanceController. Load: " + GetID() + ". Amount: " + Amount);
     }
 
-    void SaveCurrency(long _value)
+    void Save(long _value)
     {
         //Debug.Log("BalanceController. Save: " + GetID() + ". Amount: " + _value);
-        PlayerPrefs.SetString(GetPlayerPrefsKey(), Convert.ToString(_value));
+        PlayerPrefs.SetString(GetID(), Convert.ToString(_value));
     }
 }
