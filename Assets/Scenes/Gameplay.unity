@@ -444,7 +444,6 @@ MonoBehaviour:
   _packsCountFloat: 0
   _packsCount: 0
   _packsCountAbsolute: 0
-  _currentBalance: 0
 --- !u!4 &100930774
 Transform:
   m_ObjectHideFlags: 0

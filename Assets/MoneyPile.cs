@@ -22,74 +22,13 @@ public class MoneyPile : GameElement
     public GameObject packPrefab;
     public List<GameObject> moneyPacks = new List<GameObject>();
 
-    [Header("Длина единицы времени(сек)")]
-    public float timeUnitLength;
-    public float _time;
-
     [Header("Долларов в пачке")]
     public long dollarsInOnePack = 10000;
-
-    [Header("Доходы")]
-    public long incomePerMonth = 1000;
-
-    [Header("Расходы")]
-    public long expensesPerMonth = 1000;
-
-    public float _packsCountFloat;
-    public long _packsCount;
-    public long _packsCountAbsolute;
-
-    [Header("Текущий баланс")]
-    public long _currentBalance;
-    public long CurrentBalance
-    {
-        get => _currentBalance = Convert.ToInt64(PlayerPrefs.GetString(GetPlayerPrefsKey(), "0"));
-        set
-        {
-            if (_currentBalance == value) return;
-            _currentBalance = value;
-            PlayerPrefs.SetString(GetPlayerPrefsKey(), Convert.ToString(_currentBalance));
-            //Debug.Log("CurrencyModel. Amount: " + GetID() + ". Prev: " + _prevValue + " New: " + _amount);
-        }
-    }
 
     private void Start()
     {
         MoneyPackOnStart();
     }
-
-    private void Update()
-    {
-        //_time += Time.deltaTime;
-        //if (_time >= timeUnitLength)
-        //{
-        //    _time = 0f;
-        //    long _lastMonthBalance = incomePerMonth - expensesPerMonth;
-        //    app.model.balanceModel.savings.Amount += _lastMonthBalance;
-        //    CurrentBalance += _lastMonthBalance;
-        //    _packsCountFloat = (float)CurrentBalance / (float)dollarsInOnePack;
-        //    _packsCount = (long)(_packsCountFloat);
-        //    _packsCountAbsolute = (long)(Mathf.Abs(_packsCount));
-        //    if (_packsCount != 0)
-        //    {
-        //        if (_packsCount > 0)
-        //        {
-        //            AddMoneyPack(_packsCountAbsolute);
-        //        }
-        //        else if (_packsCount < 0)
-        //        {
-        //            RemoveMoneyPack(_packsCountAbsolute);
-        //        }
-        //        CurrentBalance = CurrentBalance - (_packsCount * dollarsInOnePack);
-        //        _packsCountFloat = 0f;
-        //        _packsCount = 0;
-        //        _packsCountAbsolute = 0;
-        //    }
-        //}
-    }
-
-
-
 
     Vector3 FirstPlacePos()
     {
@@ -105,12 +44,8 @@ public class MoneyPile : GameElement
         long _packsCountLond = (long)(_packsCountFloat);
         Debug.LogError("Packs Count On Start: " + _packsCountLond);
 
-        Debug.LogError("Current Balance On Start: " + CurrentBalance);
-
         AddMoneyPack(_packsCountLond);
     }
-
-
 
     public string GetPlayerPrefsKey()
     {
@@ -179,8 +114,6 @@ public class MoneyPile : GameElement
         }
         return _posOut;
     }
-
-
 
 
 
