@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 public class MoneyPile : GameElement
 {
     public CurrencyModel currencyModel;
+    public Vector3 FirstPlaceOffset;
 
     public int piecesCountX = 5;
     public int piecesCountZ = 5;
@@ -33,7 +34,7 @@ public class MoneyPile : GameElement
     Vector3 FirstPlacePos()
     {
         float _value = ((piecesCountX * pieceSizeX) * 0.5f) - (pieceSizeX * 0.5f);
-        return new Vector3(-_value, 0f, 0f);
+        return new Vector3(-_value, FirstPlaceOffset.y, FirstPlaceOffset.z);
     }
 
     void MoneyPackOnStart()
