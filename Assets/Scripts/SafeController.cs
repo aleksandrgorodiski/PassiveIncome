@@ -9,6 +9,11 @@ public class SafeController : MonoBehaviour
     public float spinDuration = 1f;
     public float deltaAngle;
 
+    private void Start()
+    {
+        OpenClose();
+    }
+
     public void OpenClose()
     {
         StartCoroutine(Spin());

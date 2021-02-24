@@ -15,4 +15,5 @@ MonoBehaviour:
   ID: income
   spriteID: 0
   localizationKey: currency_savings
-  defaultAmount: 999
+  defaultAmount: 1333
+  suffix: /mos

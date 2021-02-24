@@ -22,10 +22,10 @@ public class CurrencyModel
     {
         return Config.spriteID;
     }
-    //public string GetPlayerPrefsKey()
-    //{
-    //    return Config.playerPrefsKey;
-    //}
+    public string GetSuffix()
+    {
+        return Config.suffix;
+    }
     //public GameObject GetSkin()
     //{
     //    return Config.skin;
@@ -47,9 +47,10 @@ public class CurrencyModel
         {
             if (_amount == value) return;
             long _prevValue = _amount;
+            _amount = value;
 
-            if (value > 0) _amount = value;
-            else _amount = 0;
+            //if (value > 0) _amount = value;
+            //else _amount = 0;
 
             ON_AMOUNT_CHANGE?.Invoke(_prevValue, _amount);
             Save(_amount);

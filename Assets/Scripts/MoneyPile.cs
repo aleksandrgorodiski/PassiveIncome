@@ -26,10 +26,21 @@ public class MoneyPile : GameElement
     [Header("Долларов в пачке")]
     public long dollarsInOnePack = 10000;
 
-    private void Start()
+    private void Awake()
     {
-        MoneyPackOnStart();
+        app.model.balanceModel.savings.ON_AMOUNT_CHANGE += OnAmountChanged;
     }
+
+    void OnAmountChanged(long _prevAmount, long _amount)
+    {
+        //Debug.LogError("OnAmountChanged");
+        MoneyPackOnStart(_amount);
+    }
+
+    //private void Start()
+    //{
+    //    MoneyPackOnStart();
+    //}
 
     Vector3 FirstPlacePos()
     {
@@ -37,15 +48,20 @@ public class MoneyPile : GameElement
         return new Vector3(-_value, FirstPlaceOffset.y, FirstPlaceOffset.z);
     }
 
-    void MoneyPackOnStart()
+    void MoneyPackOnStart(long _amount)
     {
-        float _packsCountFloat = (float) app.model.balanceModel.savings.Amount / (float)dollarsInOnePack;
-        Debug.LogError("Packs Count On Start: " + _packsCountFloat);
+        if (_amount < 0) return;
 
-        long _packsCountLond = (long)(_packsCountFloat);
-        Debug.LogError("Packs Count On Start: " + _packsCountLond);
+        float _packsCountFloat = (float)_amount / (float)dollarsInOnePack;
+        //Debug.Log("Packs float: " + _packsCountFloat);
 
-        AddMoneyPack(_packsCountLond);
+        long _packsShouldBe = (long)(_packsCountFloat);
+        long _packsExist = moneyPacks.Count;
+        long _packsNeeded = _packsShouldBe - _packsExist;
+        //Debug.Log("Should Be: " + _packsShouldBe + ". Exist: " + _packsExist + ". Needed: " + _packsNeeded);
+
+        if (_packsNeeded > 0) AddMoneyPack(_packsNeeded);
+        else if (_packsNeeded < 0) RemoveMoneyPack(Math.Abs(_packsNeeded));
     }
 
     public string GetPlayerPrefsKey()
@@ -66,11 +82,17 @@ public class MoneyPile : GameElement
 
     public void RemoveMoneyPack(long _count)
     {
-        int _last = moneyPacks.Count;
-        if (_last > 0)
+        for (long i = 0; i < _count; i++)
         {
+            int _last = moneyPacks.Count;
             Destroy(moneyPacks[_last - 1]);
             moneyPacks.Remove(moneyPacks[_last - 1]);
+
+            if (moneyPacks.Count == 0)
+            {
+                Debug.LogError("No packs!");
+                break;
+            } 
         }
     }
 

@@ -15,4 +15,5 @@ MonoBehaviour:
   ID: savings
   spriteID: 9
   localizationKey: currency_savings
-  defaultAmount: 10000
+  defaultAmount: 25000
+  suffix: 

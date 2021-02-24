@@ -13,5 +13,4 @@ public class BalanceHud : MonoBehaviour
     public TextMeshProUGUI incomeText;
     public TextMeshProUGUI expensesText;
     public TextMeshProUGUI profitText;
-
 }

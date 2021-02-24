@@ -15,4 +15,5 @@ MonoBehaviour:
   ID: expenses
   spriteID: 0
   localizationKey: currency_savings
-  defaultAmount: 123
+  defaultAmount: 100
+  suffix: /mos

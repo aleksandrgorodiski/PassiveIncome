@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7ee51e5e25164a61b2da799d292621c, type: 3}
-  m_Name: Profit
+  m_Name: ProfitPerMonth
   m_EditorClassIdentifier: 
   ID: profit
-  spriteID: 0
+  spriteID: 9
   localizationKey: currency_savings
   defaultAmount: 0
+  suffix: /mos

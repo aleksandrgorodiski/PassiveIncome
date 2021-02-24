@@ -26,27 +26,7 @@ public class BalanceController: GameElement
             long _profitLastMonth = _balanceModel.incomePerMonth.Amount - _balanceModel.expensesPerMonth.Amount;
             AddSavings(_profitLastMonth);
 
-            //_balanceModel.profit.Amount += _profitLastMonth;
             _balanceModel.profit.Amount = _profitLastMonth;
-
-            //float _packsCountFloat = (float)CurrentBalance / (float)_balanceModel.GetDollarsInOnePack();
-            //long _packsCount = (long)(_packsCountFloat);
-            //long _packsCountAbsolute = (long)(Mathf.Abs(_packsCount));
-            //if (_packsCount != 0)
-            //{
-            //    if (_packsCount > 0)
-            //    {
-            //        AddMoneyPack(_packsCountAbsolute);
-            //    }
-            //    else if (_packsCount < 0)
-            //    {
-            //        RemoveMoneyPack(_packsCountAbsolute);
-            //    }
-            //    CurrentBalance = CurrentBalance - (_packsCount * _balanceModel.GetDollarsInOnePack());
-            //    _packsCountFloat = 0f;
-            //    _packsCount = 0;
-            //    _packsCountAbsolute = 0;
-            //}
         }
     }
 
