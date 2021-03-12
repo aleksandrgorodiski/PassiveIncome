@@ -17,7 +17,7 @@ public class BalanceView : GameElement
         _balanceModel.savings.ON_AMOUNT_CHANGE += OnSavingsChange;
         _balanceModel.incomePerMonth.ON_AMOUNT_CHANGE += OnIncomePerMonthChange;
         _balanceModel.expensesPerMonth.ON_AMOUNT_CHANGE += OnExpensesPerMonthChange;
-        _balanceModel.profit.ON_AMOUNT_CHANGE += OnProfitChange;
+        _balanceModel.profitPerMonth.ON_AMOUNT_CHANGE += OnProfitChange;
     }
 
     void Start()
@@ -25,12 +25,12 @@ public class BalanceView : GameElement
         SetIcon(balanceHud.savingsIconText, _balanceModel.savings.GetSpriteID());
         SetIcon(balanceHud.incomeIconText, _balanceModel.incomePerMonth.GetSpriteID());
         SetIcon(balanceHud.expensesIconText, _balanceModel.expensesPerMonth.GetSpriteID());
-        SetIcon(balanceHud.profitIconText, _balanceModel.profit.GetSpriteID());
+        SetIcon(balanceHud.profitIconText, _balanceModel.profitPerMonth.GetSpriteID());
 
         SetText(balanceHud.savingsText, balanceHud.savingsIconText, _balanceModel.savings.Amount, _balanceModel.savings.GetSuffix());
         SetText(balanceHud.incomeText, balanceHud.incomeIconText, _balanceModel.incomePerMonth.Amount, _balanceModel.incomePerMonth.GetSuffix());
         SetText(balanceHud.expensesText, balanceHud.expensesIconText, _balanceModel.expensesPerMonth.Amount, _balanceModel.expensesPerMonth.GetSuffix());
-        SetText(balanceHud.profitText, balanceHud.profitIconText, _balanceModel.profit.Amount, _balanceModel.profit.GetSuffix());
+        SetText(balanceHud.profitText, balanceHud.profitIconText, _balanceModel.profitPerMonth.Amount, _balanceModel.profitPerMonth.GetSuffix());
     }
 
     private void OnDestroy()
@@ -38,7 +38,7 @@ public class BalanceView : GameElement
         _balanceModel.savings.ON_AMOUNT_CHANGE -= OnSavingsChange;
         _balanceModel.incomePerMonth.ON_AMOUNT_CHANGE -= OnIncomePerMonthChange;
         _balanceModel.expensesPerMonth.ON_AMOUNT_CHANGE -= OnExpensesPerMonthChange;
-        _balanceModel.profit.ON_AMOUNT_CHANGE -= OnProfitChange;
+        _balanceModel.profitPerMonth.ON_AMOUNT_CHANGE -= OnProfitChange;
     }
 
     void OnSavingsChange(long prevValue, long newValue)
@@ -55,7 +55,7 @@ public class BalanceView : GameElement
     }
     void OnProfitChange(long prevValue, long newValue)
     {
-        StartCoroutine(CountTo(balanceHud.profitText, balanceHud.profitIconText, prevValue, newValue, _balanceModel.profit.GetSuffix()));
+        StartCoroutine(CountTo(balanceHud.profitText, balanceHud.profitIconText, prevValue, newValue, _balanceModel.profitPerMonth.GetSuffix()));
     }
 
     void SetText(TextMeshProUGUI _text, TextMeshProUGUI _icon, long _value, string _suffix)
@@ -70,7 +70,6 @@ public class BalanceView : GameElement
 
     IEnumerator CountTo(TextMeshProUGUI _text, TextMeshProUGUI _icon, long _prevValue, long _newValue, string _suffix)
     {
-        //long start = _prevValue;
         long _score;
         float duration = 0.0f;
         for (float timer = 0; timer < duration; timer += Time.deltaTime)

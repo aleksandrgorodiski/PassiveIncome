@@ -26,10 +26,6 @@ public class CurrencyModel
     {
         return Config.suffix;
     }
-    //public GameObject GetSkin()
-    //{
-    //    return Config.skin;
-    //}
 
     public bool CanBuyWithCurrency(long _cost)
     {

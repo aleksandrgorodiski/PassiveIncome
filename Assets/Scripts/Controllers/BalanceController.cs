@@ -13,20 +13,20 @@ public class BalanceController: GameElement
         _balanceModel.savings.Load();
         _balanceModel.incomePerMonth.Load();
         _balanceModel.expensesPerMonth.Load();
-        _balanceModel.profit.Load();
+        _balanceModel.profitPerMonth.Load();
     }
 
-    float _time;
+    float _currentTime;
     private void Update()
     {
-        _time += Time.deltaTime;
-        if (_time >= _balanceModel.GetTimeUnitLenght())
+        _currentTime += Time.deltaTime;
+        if (_currentTime >= _balanceModel.GetTimeUnitLenght())
         {
-            _time = 0f;
+            _currentTime = 0f;
             long _profitLastMonth = _balanceModel.incomePerMonth.Amount - _balanceModel.expensesPerMonth.Amount;
             AddSavings(_profitLastMonth);
 
-            _balanceModel.profit.Amount = _profitLastMonth;
+            _balanceModel.profitPerMonth.Amount = _profitLastMonth;
         }
     }
 

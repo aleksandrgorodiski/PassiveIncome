@@ -33,14 +33,8 @@ public class MoneyPile : GameElement
 
     void OnAmountChanged(long _prevAmount, long _amount)
     {
-        //Debug.LogError("OnAmountChanged");
         MoneyPackOnStart(_amount);
     }
-
-    //private void Start()
-    //{
-    //    MoneyPackOnStart();
-    //}
 
     Vector3 FirstPlacePos()
     {
@@ -53,8 +47,6 @@ public class MoneyPile : GameElement
         if (_amount < 0) return;
 
         float _packsCountFloat = (float)_amount / (float)dollarsInOnePack;
-        //Debug.Log("Packs float: " + _packsCountFloat);
-
         long _packsShouldBe = (long)(_packsCountFloat);
         long _packsExist = moneyPacks.Count;
         long _packsNeeded = _packsShouldBe - _packsExist;

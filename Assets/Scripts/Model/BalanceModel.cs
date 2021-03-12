@@ -16,7 +16,7 @@ public class BalanceModel
     [Header("Expenses")]
     public CurrencyModel expensesPerMonth;
     [Header("Profit")]
-    public CurrencyModel profit;
+    public CurrencyModel profitPerMonth;
 
     public float GetTimeUnitLenght()
     {
