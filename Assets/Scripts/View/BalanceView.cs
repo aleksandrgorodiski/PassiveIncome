@@ -3,59 +3,65 @@ using TMPro;
 using UnityEngine;
 using Utilities;
 
-public class BalanceView : GameElement
+public enum BalanceType
 {
-    public BalanceModel _balanceModel
+    Savings,
+    Income,
+    Expenses,
+    Profit
+}
+
+public class BalanceView : MonoBehaviour
+{
+    private TextMeshProUGUI[] _texts;
+
+    public void SetIcon(BalanceType type, bool isIcon, object text)
     {
-        get => app.model.balanceModel;
     }
 
-    public BalanceHud balanceHud;
-
-    private void Awake()
+    public void SetText(BalanceType type, bool isIcon, object text)
     {
-        _balanceModel.savings.ON_AMOUNT_CHANGE += OnSavingsChange;
-        _balanceModel.incomePerMonth.ON_AMOUNT_CHANGE += OnIncomePerMonthChange;
-        _balanceModel.expensesPerMonth.ON_AMOUNT_CHANGE += OnExpensesPerMonthChange;
-        _balanceModel.profitPerMonth.ON_AMOUNT_CHANGE += OnProfitChange;
+        GetText(type, isIcon).text = text.ToString();
     }
 
-    void Start()
+    private TextMeshProUGUI GetText(BalanceType type, bool isIcon)
     {
-        SetIcon(balanceHud.savingsIconText, _balanceModel.savings.GetSpriteID());
-        SetIcon(balanceHud.incomeIconText, _balanceModel.incomePerMonth.GetSpriteID());
-        SetIcon(balanceHud.expensesIconText, _balanceModel.expensesPerMonth.GetSpriteID());
-        SetIcon(balanceHud.profitIconText, _balanceModel.profitPerMonth.GetSpriteID());
-
-        SetText(balanceHud.savingsText, balanceHud.savingsIconText, _balanceModel.savings.Amount, _balanceModel.savings.GetSuffix());
-        SetText(balanceHud.incomeText, balanceHud.incomeIconText, _balanceModel.incomePerMonth.Amount, _balanceModel.incomePerMonth.GetSuffix());
-        SetText(balanceHud.expensesText, balanceHud.expensesIconText, _balanceModel.expensesPerMonth.Amount, _balanceModel.expensesPerMonth.GetSuffix());
-        SetText(balanceHud.profitText, balanceHud.profitIconText, _balanceModel.profitPerMonth.Amount, _balanceModel.profitPerMonth.GetSuffix());
+        int index = (isIcon) ? 1 : 2;
+        index *= (int)type;
+        return _texts[index];
     }
 
-    private void OnDestroy()
-    {
-        _balanceModel.savings.ON_AMOUNT_CHANGE -= OnSavingsChange;
-        _balanceModel.incomePerMonth.ON_AMOUNT_CHANGE -= OnIncomePerMonthChange;
-        _balanceModel.expensesPerMonth.ON_AMOUNT_CHANGE -= OnExpensesPerMonthChange;
-        _balanceModel.profitPerMonth.ON_AMOUNT_CHANGE -= OnProfitChange;
-    }
-
-    void OnSavingsChange(long prevValue, long newValue)
+    public void OnSavingsChange(long prevValue, long newValue)
     {
         StartCoroutine(CountTo(balanceHud.savingsText, balanceHud.savingsIconText, prevValue, newValue, _balanceModel.savings.GetSuffix()));
     }
-    void OnIncomePerMonthChange(long prevValue, long newValue)
+
+    public void OnIncomePerMonthChange(long prevValue, long newValue)
     {
-        StartCoroutine(CountTo(balanceHud.incomeText, balanceHud.incomeIconText, prevValue, newValue, _balanceModel.incomePerMonth.GetSuffix()));
+        StartCoroutine(CountTo(GetText(BalanceType.Income, false), GetText(BalanceType.Income, true), prevValue, newValue, _balanceModel.incomePerMonth.GetSuffix()));
     }
-    void OnExpensesPerMonthChange(long prevValue, long newValue)
+    public void OnExpensesPerMonthChange(long prevValue, long newValue)
     {
         StartCoroutine(CountTo(balanceHud.expensesText, balanceHud.expensesIconText, prevValue, newValue, _balanceModel.expensesPerMonth.GetSuffix()));
     }
-    void OnProfitChange(long prevValue, long newValue)
+    public void OnProfitChange(long prevValue, long newValue)
     {
         StartCoroutine(CountTo(balanceHud.profitText, balanceHud.profitIconText, prevValue, newValue, _balanceModel.profitPerMonth.GetSuffix()));
+    }
+
+    IEnumerator CountTo(TextMeshProUGUI text, TextMeshProUGUI icon, long prevValue, long newValue, string suffix)
+    {
+        long _score;
+        float duration = 0.0f;
+        for (float timer = 0; timer < duration; timer += Time.deltaTime)
+        {
+            float progress = timer / duration;
+            _score = (long)Mathf.Lerp(prevValue, newValue, progress);
+            SetText(text, icon, _score, suffix);
+            yield return null;
+        }
+        _score = newValue;
+        SetText(text, icon, newValue, suffix);
     }
 
     void SetText(TextMeshProUGUI _text, TextMeshProUGUI _icon, long _value, string _suffix)
@@ -66,20 +72,5 @@ public class BalanceView : GameElement
     void SetIcon(TextMeshProUGUI _text, int _ID)
     {
         _text.text = "<sprite=" + _ID + ">";
-    }
-
-    IEnumerator CountTo(TextMeshProUGUI _text, TextMeshProUGUI _icon, long _prevValue, long _newValue, string _suffix)
-    {
-        long _score;
-        float duration = 0.0f;
-        for (float timer = 0; timer < duration; timer += Time.deltaTime)
-        {
-            float progress = timer / duration;
-            _score = (long)Mathf.Lerp(_prevValue, _newValue, progress);
-            SetText(_text, _icon, _score, _suffix);
-            yield return null;
-        }
-        _score = _newValue;
-        SetText(_text, _icon, _newValue, _suffix);
     }
 }

@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
-using Random = UnityEngine.Random;
+﻿using UnityEngine;
 
-public class GameView : GameElement
+public class GameView : MonoBehaviour
 {
-    public GameHud gameHud;
+    [SerializeField]
+    private GameHud _gameHud;
 
-    private void Start()
-    {
-        //SetLevelText();
-    }
+    public BalanceView BalanceView;
 
-    void SetLevelText()
+    public void SetLevelText(int level)
     {
-        //gameHud.levelText.text = "Level: ";
+        _gameHud.SetLevelText(level);
     }
 }

@@ -4,6 +4,13 @@ using TMPro;
 
 public class GameHud : MonoBehaviour
 {
-    //public TextMeshProUGUI levelText;
-    //public TextMeshProUGUI maxLevelText;
+    [SerializeField]
+    private TextMeshProUGUI _levelText;
+    [SerializeField]
+    private TextMeshProUGUI _maxLevelText;
+
+    public void SetLevelText(int level)
+    {
+        _levelText.text = "Level: " +level;
+    }
 }

@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class GameModel : GameElement
+﻿public sealed class GameModel
 {
-    public BalanceModel balanceModel = new BalanceModel();
+    public readonly BalanceModel balanceModel = new BalanceModel();
 }
