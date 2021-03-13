@@ -68,9 +68,9 @@ public sealed class BalanceController : IDisposable
     public void Start()
     {
         _balanceModel.savings.ON_AMOUNT_CHANGE += _balanceView.OnSavingsChange;
-        _balanceModel.incomePerMonth.ON_AMOUNT_CHANGE += OnIncomePerMonthChange;
-        _balanceModel.expensesPerMonth.ON_AMOUNT_CHANGE += OnExpensesPerMonthChange;
-        _balanceModel.profitPerMonth.ON_AMOUNT_CHANGE += OnProfitChange;
+        _balanceModel.incomePerMonth.ON_AMOUNT_CHANGE += _balanceView.OnIncomePerMonthChange;
+        _balanceModel.expensesPerMonth.ON_AMOUNT_CHANGE += _balanceView.OnExpensesPerMonthChange;
+        _balanceModel.profitPerMonth.ON_AMOUNT_CHANGE += _balanceView.OnProfitChange;
 
         _balanceView.SetIcon(BalanceType.Savings, true, _balanceModel.savings.GetSpriteID());
         _balanceView.SetIcon(BalanceType.Income, true, _balanceModel.incomePerMonth.GetSpriteID());
@@ -103,8 +103,8 @@ public sealed class BalanceController : IDisposable
     public void Dispose()
     {
         _balanceModel.savings.ON_AMOUNT_CHANGE -= _balanceView.OnSavingsChange;
-        _balanceModel.incomePerMonth.ON_AMOUNT_CHANGE -= OnIncomePerMonthChange;
-        _balanceModel.expensesPerMonth.ON_AMOUNT_CHANGE -= OnExpensesPerMonthChange;
-        _balanceModel.profitPerMonth.ON_AMOUNT_CHANGE -= OnProfitChange;
+        _balanceModel.incomePerMonth.ON_AMOUNT_CHANGE -= _balanceView.OnIncomePerMonthChange;
+        _balanceModel.expensesPerMonth.ON_AMOUNT_CHANGE -= _balanceView.OnExpensesPerMonthChange;
+        _balanceModel.profitPerMonth.ON_AMOUNT_CHANGE -= _balanceView.OnProfitChange;
     }
 }

@@ -33,20 +33,20 @@ public class BalanceView : MonoBehaviour
 
     public void OnSavingsChange(long prevValue, long newValue)
     {
-        StartCoroutine(CountTo(balanceHud.savingsText, balanceHud.savingsIconText, prevValue, newValue, _balanceModel.savings.GetSuffix()));
+        //StartCoroutine(CountTo(balanceHud.savingsText, balanceHud.savingsIconText, prevValue, newValue, _balanceModel.savings.GetSuffix()));
     }
 
     public void OnIncomePerMonthChange(long prevValue, long newValue)
     {
-        StartCoroutine(CountTo(GetText(BalanceType.Income, false), GetText(BalanceType.Income, true), prevValue, newValue, _balanceModel.incomePerMonth.GetSuffix()));
+        //StartCoroutine(CountTo(GetText(BalanceType.Income, false), GetText(BalanceType.Income, true), prevValue, newValue, _balanceModel.incomePerMonth.GetSuffix()));
     }
     public void OnExpensesPerMonthChange(long prevValue, long newValue)
     {
-        StartCoroutine(CountTo(balanceHud.expensesText, balanceHud.expensesIconText, prevValue, newValue, _balanceModel.expensesPerMonth.GetSuffix()));
+        //StartCoroutine(CountTo(balanceHud.expensesText, balanceHud.expensesIconText, prevValue, newValue, _balanceModel.expensesPerMonth.GetSuffix()));
     }
     public void OnProfitChange(long prevValue, long newValue)
     {
-        StartCoroutine(CountTo(balanceHud.profitText, balanceHud.profitIconText, prevValue, newValue, _balanceModel.profitPerMonth.GetSuffix()));
+        //StartCoroutine(CountTo(balanceHud.profitText, balanceHud.profitIconText, prevValue, newValue, _balanceModel.profitPerMonth.GetSuffix()));
     }
 
     IEnumerator CountTo(TextMeshProUGUI text, TextMeshProUGUI icon, long prevValue, long newValue, string suffix)

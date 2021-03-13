@@ -9,7 +9,9 @@ public sealed class GameplayStarter : MonoBehaviour
 
     private void Awake()
     {
-        _gameController = new GameController(_gameView).Start();
+        //_gameController = new GameController(_gameView).Start();
+        _gameController = new GameController(_gameView);
+        _gameController.Start();
     }
 
     private void OnDestroy()

@@ -28,8 +28,8 @@ public sealed class GameController : IDisposable
         _balanceController.LoadBalance();
         _balanceController.Start();
 
-        HealthBarView view = Resources.Load<HealthBarView>("blablabla");
-        new HealthbarController(view).DoSomething();
+        //HealthBarView view = Resources.Load<HealthBarView>("blablabla");
+        //new HealthbarController(view).DoSomething();
     }
 
     public void Dispose()
