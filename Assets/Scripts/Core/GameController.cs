@@ -1,26 +1,20 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public sealed class GameController : IDisposable
+public sealed class GameController : Singleton<GameController>
 {
-    public static GameController Instance
-    {
-        get;
-        private set;
-    }
-
     private BalanceController _balanceController; 
     private EffectController _effectController;
+    private ConfigController _configController;
 
     private readonly GameView _gameView;
 
     public GameController(GameView gameView)
     {
-        Instance = this;
         _gameView = gameView;
         _balanceController = new BalanceController(gameView.BalanceView);
+        _configController = new ConfigController();
     }
 
     public void Start()
@@ -32,10 +26,9 @@ public sealed class GameController : IDisposable
         //new HealthbarController(view).DoSomething();
     }
 
-    public void Dispose()
+    protected override void OnReleaseResources()
     {
         _balanceController.Dispose();
-        Instance = null;
     }
 
     void FireEffect(CurrencyConfig _config, int _pieces, Vector3 _effectPosition)

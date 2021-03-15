@@ -1,9 +1,5 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-
-
-public class GlobalConfigs: GameElement
+﻿public sealed class GlobalConfigs
 {
-
+    public string Name;
+    public float Speed;
 }
-

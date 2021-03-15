@@ -19,6 +19,12 @@ public sealed class BalanceController : IDisposable
 
     public void LoadBalance()
     {
+        ConfigController.Instance.SaveToResources();
+        Debug.Log("config from resources Name "+ ConfigController.Instance.LoadFromResources().Name);
+
+        ConfigController.Instance.SaveToPersistent();
+        Debug.Log("config from persistent Speed " + ConfigController.Instance.LoadFromPersistent().Speed);
+
         _balanceModel.savings.Load();
         _balanceModel.incomePerMonth.Load();
         _balanceModel.expensesPerMonth.Load();
