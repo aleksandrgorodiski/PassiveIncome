@@ -358,7 +358,7 @@ PrefabInstance:
     - target: {fileID: 4909066349928121802, guid: 1360a5c0295af174cb2d13c7bbba72ec,
         type: 3}
       propertyPath: m_fontSize
-      value: 24.5
+      value: 22.25
       objectReference: {fileID: 0}
     - target: {fileID: 8773070327223831978, guid: 1360a5c0295af174cb2d13c7bbba72ec,
         type: 3}
@@ -453,7 +453,7 @@ PrefabInstance:
     - target: {fileID: 4379853523750102136, guid: 1360a5c0295af174cb2d13c7bbba72ec,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: -20
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4379853523750102136, guid: 1360a5c0295af174cb2d13c7bbba72ec,
         type: 3}
@@ -488,12 +488,7 @@ PrefabInstance:
     - target: {fileID: 4909066349928121802, guid: 1360a5c0295af174cb2d13c7bbba72ec,
         type: 3}
       propertyPath: m_fontSize
-      value: 23.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4909066349928121802, guid: 1360a5c0295af174cb2d13c7bbba72ec,
-        type: 3}
-      propertyPath: m_enableWordWrapping
-      value: 0
+      value: 24.8
       objectReference: {fileID: 0}
     - target: {fileID: 8773070327223831978, guid: 1360a5c0295af174cb2d13c7bbba72ec,
         type: 3}

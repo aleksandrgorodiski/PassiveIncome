@@ -68,6 +68,7 @@ public class MoneyPile : GameElement
             int _moneyCount = moneyPacks.Count;
             GameObject _pack = Instantiate(packPrefab);
             _pack.transform.position = PlacePosition(_moneyCount);
+            _pack.transform.parent = transform;
             moneyPacks.Add(_pack);
         }
     }
