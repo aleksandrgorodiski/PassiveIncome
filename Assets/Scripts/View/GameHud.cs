@@ -4,6 +4,7 @@ using TMPro;
 
 public class GameHud : MonoBehaviour
 {
-    //public TextMeshProUGUI levelText;
+    public TextMeshProUGUI dateText;
     //public TextMeshProUGUI maxLevelText;
+    public Image dateBar;
 }

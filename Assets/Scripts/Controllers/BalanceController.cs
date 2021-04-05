@@ -16,18 +16,17 @@ public class BalanceController: GameElement
         _balanceModel.profitPerMonth.Load();
     }
 
-    float _currentTime;
-    private void Update()
+    private void Start()
     {
-        _currentTime += Time.deltaTime;
-        if (_currentTime >= _balanceModel.GetTimeUnitLenght())
-        {
-            _currentTime = 0f;
-            long _profitLastMonth = _balanceModel.incomePerMonth.Amount - _balanceModel.expensesPerMonth.Amount;
-            AddSavings(_profitLastMonth);
+        app.model.ON_MONTH_CHANGE += OnMonthChanged;
+    }
 
-            _balanceModel.profitPerMonth.Amount = _profitLastMonth;
-        }
+    public void OnMonthChanged()
+    {
+        long _profitLastMonth = _balanceModel.incomePerMonth.Amount - _balanceModel.expensesPerMonth.Amount;
+        AddSavings(_profitLastMonth);
+
+        _balanceModel.profitPerMonth.Amount = _profitLastMonth;
     }
 
     //public void AddCurrency(CurrencyModel currencyModel)
