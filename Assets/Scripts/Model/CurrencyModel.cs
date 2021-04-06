@@ -51,7 +51,7 @@ public class CurrencyModel
             ON_AMOUNT_CHANGE?.Invoke(_prevValue, _amount);
             Save(_amount);
 
-            //Debug.Log("CurrencyModel. Amount: " + GetID() + ". Prev: " + _prevValue + " New: " + _amount);
+            Debug.Log("CurrencyModel. Amount: " + GetID() + ". Prev: " + _prevValue + " New: " + _amount);
         }
     }
 

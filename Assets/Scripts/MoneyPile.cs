@@ -26,6 +26,9 @@ public class MoneyPile : GameElement
     [Header("Долларов в пачке")]
     public long dollarsInOnePack = 10000;
 
+    [Header("Visible Packs")]
+    public long visiblePacks = 50;
+
     private void Awake()
     {
         app.model.balanceModel.savings.ON_AMOUNT_CHANGE += OnAmountChanged;
@@ -61,15 +64,17 @@ public class MoneyPile : GameElement
         return "CurrentBalance";
     }
 
-    public void AddMoneyPack(long _count)
+    public void AddMoneyPack(long _packsCount)
     {
-        for (long i = 0; i < _count; i++)
+        for (long i = 0; i < _packsCount; i++)
         {
-            int _moneyCount = moneyPacks.Count;
             GameObject _pack = Instantiate(packPrefab);
-            _pack.transform.position = PlacePosition(_moneyCount);
+            _pack.transform.position = PlacePosition(moneyPacks.Count);
             _pack.transform.parent = transform;
             moneyPacks.Add(_pack);
+
+            if (moneyPacks.Count > visiblePacks) _pack.SetActive(false);
+            else _pack.SetActive(true);
         }
     }
 

@@ -10,6 +10,7 @@ public class GameController : GameElement
 {
     public BalanceController balanceController;
     public EffectController effectController;
+    public PlayerController playerController;
 
     private void Awake()
     {
@@ -26,7 +27,6 @@ public class GameController : GameElement
         {
             string _value = CultureInfo.CurrentUICulture.DateTimeFormat.MonthNames[i];
             monthList.Add(_value);
-            //Debug.LogError(_value);
         }
     }
 
