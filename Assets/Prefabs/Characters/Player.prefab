@@ -49,7 +49,8 @@ MonoBehaviour:
   rotateSpeed: 10
   moveTime: 1
   rotateTime: 1
-  waitTime: 1
+  waitTime: 2
+  anim: {fileID: 3333386840854525839}
 --- !u!1 &5834159859523889364
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,6 +124,12 @@ PrefabInstance:
 --- !u!4 &2810059156539418727 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1034030729428810325, guid: 2a2cbb08ceb3b401bad09f97593c5836,
+    type: 3}
+  m_PrefabInstance: {fileID: 2929249138470851122}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &3333386840854525839 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 496619964043945405, guid: 2a2cbb08ceb3b401bad09f97593c5836,
     type: 3}
   m_PrefabInstance: {fileID: 2929249138470851122}
   m_PrefabAsset: {fileID: 0}

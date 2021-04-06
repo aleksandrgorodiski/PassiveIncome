@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerController : GameElement
 {
@@ -13,8 +14,11 @@ public class PlayerController : GameElement
     public float rotateTime;
     public float waitTime;
 
-    private void Awake()
+    public Animator anim;
+
+    void PlayAnimation(string clip, float time)
     {
+        anim.Play(clip, 0, time);
     }
 
     private void OnAmountChanged(long arg1, long arg2)
@@ -31,6 +35,8 @@ public class PlayerController : GameElement
 
     IEnumerator MoveIn(Vector3 _newPos)
     {
+        PlayAnimation("Walk", 0f);
+
         Vector3 _startPosition = transform.position;
         float _t = 0.0f;
         while (_t < moveTime)
@@ -39,12 +45,16 @@ public class PlayerController : GameElement
             transform.position = Vector3.Lerp(_startPosition, _newPos, _t / moveTime);
             yield return null;
         }
+
+        PlayAnimation("Idle", Random.Range(0f, 1f));
         yield return new WaitForSeconds(waitTime);
         StartCoroutine(MoveOut(positionStart));
     }
 
     IEnumerator MoveOut(Vector3 _newPos)
     {
+        PlayAnimation("Walk", 0f);
+
         Vector3 _startPosition = transform.position;
         float _t = 0.0f;
         while (_t < moveTime)
