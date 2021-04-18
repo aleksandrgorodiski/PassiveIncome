@@ -50,6 +50,10 @@ MonoBehaviour:
   moveTime: 1
   rotateTime: 1
   waitTime: 2
+  cashPrefab: {fileID: 5489368978027399354, guid: 2892b318be5de4618b5cf27c9cbf76b0,
+    type: 3}
+  cashStartPos: {fileID: 3773472653771435028}
+  cashEndPos: {fileID: 0}
   anim: {fileID: 3333386840854525839}
 --- !u!1 &5834159859523889364
 GameObject:
@@ -130,6 +134,12 @@ Transform:
 --- !u!95 &3333386840854525839 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 496619964043945405, guid: 2a2cbb08ceb3b401bad09f97593c5836,
+    type: 3}
+  m_PrefabInstance: {fileID: 2929249138470851122}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3773472653771435028 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2087658054729268774, guid: 2a2cbb08ceb3b401bad09f97593c5836,
     type: 3}
   m_PrefabInstance: {fileID: 2929249138470851122}
   m_PrefabAsset: {fileID: 0}

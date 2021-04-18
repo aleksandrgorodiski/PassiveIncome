@@ -13,7 +13,9 @@ public class PlayerController : GameElement
     public float moveTime;
     public float rotateTime;
     public float waitTime;
-
+    public GameObject cashPrefab;
+    public Transform cashStartPos;
+    public Transform cashEndPos;
     public Animator anim;
 
     void PlayAnimation(string clip, float time)
@@ -47,6 +49,8 @@ public class PlayerController : GameElement
         }
 
         PlayAnimation("Idle", Random.Range(0f, 1f));
+        FireCash();
+
         yield return new WaitForSeconds(waitTime);
         StartCoroutine(MoveOut(positionStart));
     }
@@ -94,4 +98,13 @@ public class PlayerController : GameElement
             yield return null;
         }
     }
+
+    void FireCash()
+    {
+        GameObject _cash = Instantiate(cashPrefab);
+        //_cash.transform.position = cashStartPos.position;
+        _cash.GetComponent<ParabolaAnimation>().FireCash(cashEndPos, cashStartPos.position);
+    }
+
+
 }

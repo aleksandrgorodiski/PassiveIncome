@@ -353,6 +353,7 @@ Transform:
   - {fileID: 1429799052}
   - {fileID: 69674081}
   - {fileID: 434127303}
+  - {fileID: 172053012}
   m_Father: {fileID: 1325773731}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -382,6 +383,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   balanceHud: {fileID: 200097578}
+--- !u!1 &172053011
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 172053012}
+  m_Layer: 0
+  m_Name: PlayerTarget (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &172053012
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172053011}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.06, y: 2.52, z: 1.16}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 155192458}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &200097572
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,7 +573,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &296788731
 Transform:
   m_ObjectHideFlags: 0
@@ -1045,7 +1076,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &829512228
 Transform:
   m_ObjectHideFlags: 0
@@ -2714,6 +2745,10 @@ PrefabInstance:
       propertyPath: waitTime
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1345379294, guid: 446f72f9eab4c8c478085ab3f2216c5d, type: 3}
+      propertyPath: cashEndPos
+      value: 
+      objectReference: {fileID: 172053012}
     - target: {fileID: 539685832898388297, guid: 446f72f9eab4c8c478085ab3f2216c5d,
         type: 3}
       propertyPath: m_LocalPosition.x

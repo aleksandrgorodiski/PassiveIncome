@@ -2,27 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ParcelController : GameElement
+public class ParabolaAnimation : GameElement
 {
     protected float Animation;
     Vector3 _startPosition;
-    private float _flightTime;
-    private float _height;
-    private float _rotSpeed;
+    public float _flightTime = 1f;
+    public float _height = 2f;
+    public float _rotSpeed = 500f;
     private int _rotDirection;
     private Transform _parcelDestination;
 
-    void Start()
+    public void FireCash(Transform parcelDestination, Vector3 value)
     {
-        _flightTime = 0.7f;
-        _height = 4f;
-        _rotSpeed = 750f;
-        _rotDirection = GetDirection();
-    }
-
-    public void FireCash(Transform parcelDestination)
-    {
+        _startPosition = value;
         _parcelDestination = parcelDestination;
+        _rotDirection = GetDirection();
     }
 
     int GetDirection()
