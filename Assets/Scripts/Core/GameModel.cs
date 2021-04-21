@@ -2,10 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Globalization;
+using UnityEngine.SceneManagement;
 
 public class GameModel : GameElement
 {
-    public event Action ON_MONTH_CHANGE;
+    public event Action ON_DATE_CHANGE;
 
     public BalanceModel balanceModel = new BalanceModel();
 
@@ -25,30 +27,30 @@ public class GameModel : GameElement
         return _dollarsInOnePack;
     }
 
-
-
     [SerializeField]
     private int _currentMonth;
     public int CurrentMonth
     {
-        get => _currentMonth;
+        get => _currentMonth = PlayerPrefs.GetInt("current_month", DateTime.Now.Month);
         set
         {
             if (_currentMonth == value) return;
             _currentMonth = value;
-            ON_MONTH_CHANGE?.Invoke();
+            PlayerPrefs.SetInt("current_month", value);
+            ON_DATE_CHANGE?.Invoke();
         }
     }
 
     [SerializeField]
-    private string _currentYear;
-    public string CurrentYear
+    private int _currentYear;
+    public int CurrentYear
     {
-        get => _currentYear;
+        get => _currentYear = PlayerPrefs.GetInt("current_year", DateTime.Now.Year);
         set
         {
             if (_currentYear == value) return;
             _currentYear = value;
+            PlayerPrefs.SetInt("current_year", value);
         }
     }
 }

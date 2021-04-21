@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Savings
   m_EditorClassIdentifier: 
   ID: savings
-  spriteID: 9
-  localizationKey: currency_savings
+  nameLocKey: name_savings
   defaultAmount: 25000
-  suffix: 
+  prefixLocKey: 
+  suffixLocKey: suffix_savings

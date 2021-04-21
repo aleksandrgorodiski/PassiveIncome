@@ -11,31 +11,12 @@ public class GameController : GameElement
     public BalanceController balanceController;
     public EffectController effectController;
     public PlayerController playerController;
+    public LocalizationManager localization;
 
     private void Awake()
     {
+        localization.SelectLocalizationLanguage();
         balanceController.LoadBalance();
-
-        CreateListAllMonth();
-        SetCurrentDate();
-    }
-
-    public List<string> monthList = new List<string>();
-    void CreateListAllMonth()
-    {
-        for (int i = 0; i < 12; i++)
-        {
-            string _value = CultureInfo.CurrentUICulture.DateTimeFormat.MonthNames[i];
-            monthList.Add(_value);
-        }
-    }
-
-    void SetCurrentDate()
-    {
-        app.model.CurrentYear = DateTime.Now.ToString("yyyy");
-
-        string _value = DateTime.Now.ToString("MMMM");
-        app.model.CurrentMonth = monthList.IndexOf(_value);
     }
 
     void Update()
@@ -69,16 +50,16 @@ public class GameController : GameElement
 
             int _value = app.model.CurrentMonth;
             _value++;
-            if (_value < 12)
+            if (_value <= 12)
             {
                 app.model.CurrentMonth = _value;
             }
             else
             {
-                int value = Convert.ToInt32(app.model.CurrentYear);
+                int value = app.model.CurrentYear;
                 value++;
-                app.model.CurrentYear = value.ToString();
-                app.model.CurrentMonth = 0;
+                app.model.CurrentYear = value;
+                app.model.CurrentMonth = 1;
             }
         }
     }

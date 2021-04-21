@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ProfitPerMonth
   m_EditorClassIdentifier: 
   ID: profit
-  spriteID: 9
-  localizationKey: currency_savings
+  nameLocKey: name_profit
   defaultAmount: 0
-  suffix: /mos
+  prefixLocKey: 
+  suffixLocKey: name_per_time_unit

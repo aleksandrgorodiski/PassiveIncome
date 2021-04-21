@@ -14,17 +14,24 @@ public class CurrencyModel
     {
         return Config.defaultAmount;
     }
-    public string GetID()
+    string GetID()
     {
         return Config.ID;
     }
-    public int GetSpriteID()
+
+    public string GetNameKey()
     {
-        return Config.spriteID;
+        return Config.nameLocKey;
     }
-    public string GetSuffix()
+
+    public string GetSuffixLocKey()
     {
-        return Config.suffix;
+        return Config.suffixLocKey;
+    }
+
+    public string GetPrefixLocKey()
+    {
+        return Config.prefixLocKey;
     }
 
     public bool CanBuyWithCurrency(long _cost)
@@ -44,9 +51,6 @@ public class CurrencyModel
             if (_amount == value) return;
             long _prevValue = _amount;
             _amount = value;
-
-            //if (value > 0) _amount = value;
-            //else _amount = 0;
 
             ON_AMOUNT_CHANGE?.Invoke(_prevValue, _amount);
             Save(_amount);

@@ -14,61 +14,61 @@ public class BalanceView : GameElement
 
     private void Awake()
     {
-        _balanceModel.savings.ON_AMOUNT_CHANGE += OnSavingsChange;
         _balanceModel.incomePerMonth.ON_AMOUNT_CHANGE += OnIncomePerMonthChange;
         _balanceModel.expensesPerMonth.ON_AMOUNT_CHANGE += OnExpensesPerMonthChange;
         _balanceModel.profitPerMonth.ON_AMOUNT_CHANGE += OnProfitChange;
-    }
-
-    void Start()
-    {
-        SetIcon(balanceHud.savingsIconText, _balanceModel.savings.GetSpriteID());
-        SetIcon(balanceHud.incomeIconText, _balanceModel.incomePerMonth.GetSpriteID());
-        SetIcon(balanceHud.expensesIconText, _balanceModel.expensesPerMonth.GetSpriteID());
-        SetIcon(balanceHud.profitIconText, _balanceModel.profitPerMonth.GetSpriteID());
-
-        SetText(balanceHud.savingsText, balanceHud.savingsIconText, _balanceModel.savings.Amount, _balanceModel.savings.GetSuffix());
-        SetText(balanceHud.incomeText, balanceHud.incomeIconText, _balanceModel.incomePerMonth.Amount, _balanceModel.incomePerMonth.GetSuffix());
-        SetText(balanceHud.expensesText, balanceHud.expensesIconText, _balanceModel.expensesPerMonth.Amount, _balanceModel.expensesPerMonth.GetSuffix());
-        SetText(balanceHud.profitText, balanceHud.profitIconText, _balanceModel.profitPerMonth.Amount, _balanceModel.profitPerMonth.GetSuffix());
+        _balanceModel.savings.ON_AMOUNT_CHANGE += OnSavingsChange;
     }
 
     private void OnDestroy()
     {
-        _balanceModel.savings.ON_AMOUNT_CHANGE -= OnSavingsChange;
         _balanceModel.incomePerMonth.ON_AMOUNT_CHANGE -= OnIncomePerMonthChange;
         _balanceModel.expensesPerMonth.ON_AMOUNT_CHANGE -= OnExpensesPerMonthChange;
         _balanceModel.profitPerMonth.ON_AMOUNT_CHANGE -= OnProfitChange;
+        _balanceModel.savings.ON_AMOUNT_CHANGE -= OnSavingsChange;
     }
 
     void OnSavingsChange(long prevValue, long newValue)
     {
-        StartCoroutine(CountTo(balanceHud.savingsText, balanceHud.savingsIconText, prevValue, newValue, _balanceModel.savings.GetSuffix()));
+        StartCoroutine(CountTo(balanceHud.savingsText, prevValue, newValue, _balanceModel.savings.GetNameKey(),
+            _balanceModel.savings.GetPrefixLocKey(), _balanceModel.savings.GetSuffixLocKey()));
     }
     void OnIncomePerMonthChange(long prevValue, long newValue)
     {
-        StartCoroutine(CountTo(balanceHud.incomeText, balanceHud.incomeIconText, prevValue, newValue, _balanceModel.incomePerMonth.GetSuffix()));
+        StartCoroutine(CountTo(balanceHud.incomeText, prevValue, newValue, _balanceModel.incomePerMonth.GetNameKey(),
+            _balanceModel.incomePerMonth.GetPrefixLocKey(), _balanceModel.incomePerMonth.GetSuffixLocKey()));
     }
     void OnExpensesPerMonthChange(long prevValue, long newValue)
     {
-        StartCoroutine(CountTo(balanceHud.expensesText, balanceHud.expensesIconText, prevValue, newValue, _balanceModel.expensesPerMonth.GetSuffix()));
+        StartCoroutine(CountTo(balanceHud.expensesText, prevValue, newValue, _balanceModel.expensesPerMonth.GetNameKey(),
+            _balanceModel.expensesPerMonth.GetPrefixLocKey(), _balanceModel.expensesPerMonth.GetSuffixLocKey()));
     }
     void OnProfitChange(long prevValue, long newValue)
     {
-        StartCoroutine(CountTo(balanceHud.profitText, balanceHud.profitIconText, prevValue, newValue, _balanceModel.profitPerMonth.GetSuffix()));
+        StartCoroutine(CountTo(balanceHud.profitText, prevValue, newValue, _balanceModel.profitPerMonth.GetNameKey(),
+            _balanceModel.profitPerMonth.GetPrefixLocKey(), _balanceModel.profitPerMonth.GetSuffixLocKey()));
+
+        if (newValue < 0) balanceHud.profitSprite.color = balanceHud.redColor;
+        else balanceHud.profitSprite.color = balanceHud.greenColor;
     }
 
-    void SetText(TextMeshProUGUI _text, TextMeshProUGUI _icon, long _value, string _suffix)
+
+
+    void SetText(TextMeshProUGUI _text, long _value, string _nameKey, string _prefixKey, string _suffixKey)
     {
-        _text.text = MathUtil.LongToString(_value, "", _suffix);
+        string locNameKey = LocalizedString(_nameKey);
+        string locSuffixKey = LocalizedString(_suffixKey);
+        string locCashSuffixKey = LocalizedString(MathUtil.LongToCashSuffix(_value));
+
+        _text.text = locNameKey + ": "+  _prefixKey + MathUtil.LongToString(_value) + locCashSuffixKey + locSuffixKey;
     }
 
-    void SetIcon(TextMeshProUGUI _text, int _ID)
+    string LocalizedString(string _value)
     {
-        _text.text = "<sprite=" + _ID + ">";
+        return app.controller.localization.GetLocalizedValue(_value);
     }
 
-    IEnumerator CountTo(TextMeshProUGUI _text, TextMeshProUGUI _icon, long _prevValue, long _newValue, string _suffix)
+    IEnumerator CountTo(TextMeshProUGUI _text, long _prevValue, long _newValue, string _name, string _prefix, string _suffix)
     {
         long _score;
         float duration = 0.0f;
@@ -76,10 +76,10 @@ public class BalanceView : GameElement
         {
             float progress = timer / duration;
             _score = (long)Mathf.Lerp(_prevValue, _newValue, progress);
-            SetText(_text, _icon, _score, _suffix);
+            SetText(_text, _score, _name, _prefix, _suffix);
             yield return null;
         }
         _score = _newValue;
-        SetText(_text, _icon, _newValue, _suffix);
+        SetText(_text, _newValue, _name, _prefix, _suffix);
     }
 }

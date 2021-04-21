@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ExpensesPerMonth
   m_EditorClassIdentifier: 
   ID: expenses
-  spriteID: 0
-  localizationKey: currency_savings
-  defaultAmount: 100
-  suffix: /mos
+  nameLocKey: name_expenses
+  defaultAmount: 356
+  prefixLocKey: '-'
+  suffixLocKey: name_per_time_unit

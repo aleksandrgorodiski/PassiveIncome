@@ -7,10 +7,10 @@ using UnityEngine.UI;
 public class CurrencyConfig : ScriptableObject
 {
     public string ID;
-    public int spriteID;
-    public string localizationKey;
+    public string nameLocKey;
     public string defaultAmount;
-    public string suffix;
+    public string prefixLocKey;
+    public string suffixLocKey;
 }
 
 

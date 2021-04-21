@@ -1,0 +1,23 @@
+{
+    "items":
+    [
+	{"key": "language_code", "value": "Uk"},
+	
+	{"key": "name_per_time_unit", "value": "/міс"},
+
+        {"key": "hundred", "value": ""},
+        {"key": "thousand", "value": "тис"},
+        {"key": "million", "value": "млн"},
+        {"key": "billion", "value": "млрд"},
+
+        {"key": "name_expenses", "value": "Витрати"},
+        {"key": "name_income", "value": "Дохід"},
+        {"key": "name_profit", "value": "Прибуток"},
+        {"key": "name_losses", "value": "Збиток"},
+        {"key": "name_savings", "value": "Заощадження"},
+        {"key": "suffix_savings", "value": ""},
+
+        {"key": "date", "value": "Дата"}
+
+    ]
+}

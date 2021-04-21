@@ -40,11 +40,12 @@ namespace Utilities
             return _mos;
         }
 
-        public static string LongToString(long cash, string prefix = "", string suffixTimeUnit = "")
+        public static string LongToString(long cash)
         {
-            string[] suffixes = { "", "k", "m", "b" };
             int suffixIndex;
             int digits;
+            var text = "";
+
             if (cash == 0)
             {
                 suffixIndex = 0; // log10 of 0 is not valid
@@ -61,24 +62,40 @@ namespace Utilities
                 digits = Math.Abs(cash).ToString().Length;
             }
 
-            var dividor = Mathf.Pow(10, suffixIndex * 3);  // actual number we print
-            var text = "";
-
-            //Debug.LogError(digits);
-
+            var dividor = Mathf.Pow(10, suffixIndex * 3);
             if (digits < 4)
             {
-                text = prefix + (cash / dividor).ToString() + suffixes[suffixIndex] + suffixTimeUnit;
+                text = (cash / dividor).ToString();
             }
             else if (digits >= 4 && digits < 7)
             {
-                text = prefix + (cash / dividor).ToString("F2") + suffixes[suffixIndex] + suffixTimeUnit;
+                text = (cash / dividor).ToString("F2");
             }
             else
             {
-                text = prefix + (cash / dividor).ToString("F3") + suffixes[suffixIndex] + suffixTimeUnit;
+                text = (cash / dividor).ToString("F3");
             }
             return text;
+        }
+
+        public static string LongToCashSuffix(long cash)
+        {
+            string[] suffixes = { "hundred", "thousand", "million", "billion" };
+            int suffixIndex;
+
+            if (cash == 0)
+            {
+                suffixIndex = 0; // log10 of 0 is not valid
+            }
+            else if (cash > 0)
+            {
+                suffixIndex = (int)(Mathf.Log10(cash) / 3); // get number of digits and divide by 3
+            }
+            else
+            {
+                suffixIndex = (int)(Mathf.Log10(Math.Abs(cash)) / 3);
+            }
+            return suffixes[suffixIndex];
         }
 
         public static long IntToLong(int value)

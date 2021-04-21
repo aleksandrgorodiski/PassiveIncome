@@ -18,7 +18,7 @@ public class BalanceController: GameElement
 
     private void Start()
     {
-        app.model.ON_MONTH_CHANGE += OnMonthChanged;
+        app.model.ON_DATE_CHANGE += OnMonthChanged;
     }
 
     public void OnMonthChanged()

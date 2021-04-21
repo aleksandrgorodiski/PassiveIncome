@@ -4,13 +4,12 @@ using TMPro;
 
 public class BalanceHud : MonoBehaviour
 {
-    public TextMeshProUGUI savingsIconText;
-    public TextMeshProUGUI incomeIconText;
-    public TextMeshProUGUI expensesIconText;
-    public TextMeshProUGUI profitIconText;
+    public Color greenColor;
+    public Color redColor;
 
-    public TextMeshProUGUI savingsText;
     public TextMeshProUGUI incomeText;
     public TextMeshProUGUI expensesText;
     public TextMeshProUGUI profitText;
+    public Image profitSprite;
+    public TextMeshProUGUI savingsText;
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IncomePerMonth
   m_EditorClassIdentifier: 
   ID: income
-  spriteID: 0
-  localizationKey: currency_savings
+  nameLocKey: name_income
   defaultAmount: 1333
-  suffix: /mos
+  prefixLocKey: +
+  suffixLocKey: name_per_time_unit
