@@ -30,37 +30,68 @@ public class BalanceView : GameElement
 
     void OnSavingsChange(long prevValue, long newValue)
     {
-        StartCoroutine(CountTo(balanceHud.savingsText, prevValue, newValue, _balanceModel.savings.GetNameKey(),
+        StartCoroutine(CountTo(balanceHud.savingsText, app.view.greenColor, prevValue, newValue, _balanceModel.savings.GetNameLocKey(),
             _balanceModel.savings.GetPrefixLocKey(), _balanceModel.savings.GetSuffixLocKey()));
+
+        if (_balanceModel.profitPerMonth.Amount > 0)
+        {
+            long milestoneValue1 = 1000000;
+            long milestoneValue2 = 100000;
+
+            string _line1 = app.controller.localization.GetLocalizedValue("savings_forecast") + ":";
+            string _line2 = Line(milestoneValue1, AchievementYear(newValue, milestoneValue1));
+            string _line3 = Line(milestoneValue2, AchievementYear(newValue, milestoneValue2));
+            balanceHud.savingsForecastText.text = _line1 + "\n" + _line2 + "\n" + _line3;
+        }
     }
+
+    long AchievementYear(long savings, long milestone)
+    {
+        long leftToEarnCash = milestone - savings;
+        long leftToEarnYear = (leftToEarnCash / _balanceModel.profitPerMonth.Amount) / 12;
+        return app.model.CurrentYear + leftToEarnYear;
+    }
+    
+    string Line(long milestone, long year)
+    {
+        return "<color=" + app.view.StringColor(app.view.greenColor) + ">" + MathUtil.LongToCashString(milestone) + "</color>" +
+                app.controller.localization.GetLocalizedValue(MathUtil.LongToCashSuffixKey(milestone)) + " - " +
+                "<color=" + app.view.StringColor(app.view.yellowColor) + ">" + year + "</color>" +
+                app.controller.localization.GetLocalizedValue("name_year");
+    }
+
+
+
     void OnIncomePerMonthChange(long prevValue, long newValue)
     {
-        StartCoroutine(CountTo(balanceHud.incomeText, prevValue, newValue, _balanceModel.incomePerMonth.GetNameKey(),
+        StartCoroutine(CountTo(balanceHud.incomeText, app.view.greenColor, prevValue, newValue, _balanceModel.incomePerMonth.GetNameLocKey(),
             _balanceModel.incomePerMonth.GetPrefixLocKey(), _balanceModel.incomePerMonth.GetSuffixLocKey()));
     }
     void OnExpensesPerMonthChange(long prevValue, long newValue)
     {
-        StartCoroutine(CountTo(balanceHud.expensesText, prevValue, newValue, _balanceModel.expensesPerMonth.GetNameKey(),
+        StartCoroutine(CountTo(balanceHud.expensesText, app.view.redColor, prevValue, newValue, _balanceModel.expensesPerMonth.GetNameLocKey(),
             _balanceModel.expensesPerMonth.GetPrefixLocKey(), _balanceModel.expensesPerMonth.GetSuffixLocKey()));
     }
     void OnProfitChange(long prevValue, long newValue)
     {
-        StartCoroutine(CountTo(balanceHud.profitText, prevValue, newValue, _balanceModel.profitPerMonth.GetNameKey(),
-            _balanceModel.profitPerMonth.GetPrefixLocKey(), _balanceModel.profitPerMonth.GetSuffixLocKey()));
+        Color color;
+        if (newValue < 0) color = app.view.redColor;
+        else color = app.view.greenColor;
 
-        if (newValue < 0) balanceHud.profitSprite.color = balanceHud.redColor;
-        else balanceHud.profitSprite.color = balanceHud.greenColor;
+        StartCoroutine(CountTo(balanceHud.profitText, color, prevValue, newValue, _balanceModel.profitPerMonth.GetNameLocKey(),
+            _balanceModel.profitPerMonth.GetPrefixLocKey(), _balanceModel.profitPerMonth.GetSuffixLocKey()));
     }
 
-
-
-    void SetText(TextMeshProUGUI _text, long _value, string _nameKey, string _prefixKey, string _suffixKey)
+    void SetText(TextMeshProUGUI _text, Color _color, long _value, string _nameKey, string _prefixKey, string _suffixKey)
     {
         string locNameKey = LocalizedString(_nameKey);
         string locSuffixKey = LocalizedString(_suffixKey);
-        string locCashSuffixKey = LocalizedString(MathUtil.LongToCashSuffix(_value));
+        string cash = MathUtil.LongToCashString(_value);
+        string locCashSuffixKey = LocalizedString(MathUtil.LongToCashSuffixKey(_value));
 
-        _text.text = locNameKey + ": "+  _prefixKey + MathUtil.LongToString(_value) + locCashSuffixKey + locSuffixKey;
+        cash = "<color=" + app.view.StringColor(_color) + ">" + cash + "</color>";
+
+        _text.text = locNameKey + ": "+  _prefixKey + cash + locCashSuffixKey + locSuffixKey;
     }
 
     string LocalizedString(string _value)
@@ -68,18 +99,18 @@ public class BalanceView : GameElement
         return app.controller.localization.GetLocalizedValue(_value);
     }
 
-    IEnumerator CountTo(TextMeshProUGUI _text, long _prevValue, long _newValue, string _name, string _prefix, string _suffix)
+    IEnumerator CountTo(TextMeshProUGUI _text, Color _color, long _prevValue, long _newValue, string _name, string _prefix, string _suffix)
     {
         long _score;
-        float duration = 0.0f;
+        float duration = _balanceModel.GetCountDuration();
         for (float timer = 0; timer < duration; timer += Time.deltaTime)
         {
             float progress = timer / duration;
             _score = (long)Mathf.Lerp(_prevValue, _newValue, progress);
-            SetText(_text, _score, _name, _prefix, _suffix);
+            SetText(_text, _color, _score, _name, _prefix, _suffix);
             yield return null;
         }
         _score = _newValue;
-        SetText(_text, _newValue, _name, _prefix, _suffix);
+        SetText(_text, _color, _newValue, _name, _prefix, _suffix);
     }
 }

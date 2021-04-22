@@ -6,6 +6,10 @@ using Random = UnityEngine.Random;
 
 public class GameView : GameElement
 {
+    public Color greenColor;
+    public Color redColor;
+    public Color yellowColor;
+
     public GameHud gameHud;
 
     public GameModel _gameModel
@@ -24,7 +28,12 @@ public class GameView : GameElement
     {
         string _month = monthList[_gameModel.CurrentMonth - 1];
         string _year = _gameModel.CurrentYear.ToString();
-        gameHud.dateText.text = app.controller.localization.GetLocalizedValue("date") + ": "+ _month + ", " + _year;
+        gameHud.dateText.text = app.controller.localization.GetLocalizedValue("date") + ": "+ "<color=" + StringColor(yellowColor) + ">" + _month + ", " + _year + "</color>";
+    }
+
+    public string StringColor(Color color)
+    {
+        return "#" + ColorUtility.ToHtmlStringRGBA(color);
     }
 
     public void SetDateBar(float _value)

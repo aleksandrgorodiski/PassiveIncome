@@ -40,7 +40,7 @@ namespace Utilities
             return _mos;
         }
 
-        public static string LongToString(long cash)
+        public static string LongToCashString(long cash)
         {
             int suffixIndex;
             int digits;
@@ -73,12 +73,12 @@ namespace Utilities
             }
             else
             {
-                text = (cash / dividor).ToString("F3");
+                text = (cash / dividor).ToString("F1");
             }
             return text;
         }
 
-        public static string LongToCashSuffix(long cash)
+        public static string LongToCashSuffixKey(long cash)
         {
             string[] suffixes = { "hundred", "thousand", "million", "billion" };
             int suffixIndex;

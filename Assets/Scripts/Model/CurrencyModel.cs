@@ -19,7 +19,7 @@ public class CurrencyModel
         return Config.ID;
     }
 
-    public string GetNameKey()
+    public string GetNameLocKey()
     {
         return Config.nameLocKey;
     }

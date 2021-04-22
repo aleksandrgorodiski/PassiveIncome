@@ -24,18 +24,10 @@ public class BalanceController: GameElement
     public void OnMonthChanged()
     {
         long _profitLastMonth = _balanceModel.incomePerMonth.Amount - _balanceModel.expensesPerMonth.Amount;
-        AddSavings(_profitLastMonth);
-
         _balanceModel.profitPerMonth.Amount = _profitLastMonth;
-    }
 
-    //public void AddCurrency(CurrencyModel currencyModel)
-    //{
-    //    ulong _amount = currencyModel.Amount;
-    //    ulong _value = Convert.ToUInt64(currencyModel.GetNominal());
-    //    ulong _newAmount = _amount + _value;
-    //    currencyModel.Amount = _newAmount;
-    //}
+        AddSavings(_profitLastMonth);
+    }
 
     public void AddSavings(long _plusValue)
     {
@@ -44,14 +36,4 @@ public class BalanceController: GameElement
         long _newAmount = _amount + _value;
         _balanceModel.savings.Amount = _newAmount;
     }
-
-    //public void MinusCurrency(CurrencyModel currencyModel, ulong _minusValue)
-    //{
-    //    Debug.Log("BalanceController. Minus: " + currencyModel.GetID() + ". Amount: " + currencyModel.Amount + ". Cost: " + _minusValue);
-    //    ulong _amount = currencyModel.Amount;
-    //    ulong _newAmount = _amount - _minusValue;
-    //    currencyModel.Amount = _newAmount;
-    //}
-
-
 }

@@ -3,24 +3,25 @@
     [
         {"key": "language_code", "value": "en-US"},
 
+	{"key": "savings_forecast", "value": "Savings forecast"},
+
+	{"key": "name_per_time_unit", "value": "/month"},
+	{"key": "name_year", "value": "yr."},
+
         {"key": "hundred", "value": ""},
         {"key": "thousand", "value": "k"},
         {"key": "million", "value": "m"},
         {"key": "billion", "value": "b"},
 
         {"key": "name_expenses", "value": "Expenses"},
-        {"key": "suffix_expenses", "value": "/month"},
-
         {"key": "name_income", "value": "Income"},
-        {"key": "suffix_income", "value": "/month"},
-
         {"key": "name_profit", "value": "Profit"},
-        {"key": "suffix_profit", "value": "/month"},
-
         {"key": "name_savings", "value": "Savings"},
         {"key": "suffix_savings", "value": ""},
 
 	{"key": "date", "value": "Date"}
+
+
 
     ]
 }

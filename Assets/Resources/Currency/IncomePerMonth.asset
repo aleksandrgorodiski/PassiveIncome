@@ -15,5 +15,5 @@ MonoBehaviour:
   ID: income
   nameLocKey: name_income
   defaultAmount: 1333
-  prefixLocKey: +
+  prefixLocKey: 
   suffixLocKey: name_per_time_unit

@@ -3,7 +3,11 @@
     [
 	{"key": "language_code", "value": "Uk"},
 	
-	{"key": "name_per_time_unit", "value": "/міс"},
+
+	{"key": "savings_forecast", "value": "Прогноз заощаджень"},
+
+	{"key": "name_per_time_unit", "value": "/місяць"},
+	{"key": "name_year", "value": "рік"},
 
         {"key": "hundred", "value": ""},
         {"key": "thousand", "value": "тис"},
