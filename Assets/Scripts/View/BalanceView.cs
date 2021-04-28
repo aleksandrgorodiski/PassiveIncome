@@ -60,8 +60,6 @@ public class BalanceView : GameElement
                 app.controller.localization.GetLocalizedValue("name_year");
     }
 
-
-
     void OnIncomePerMonthChange(long prevValue, long newValue)
     {
         StartCoroutine(CountTo(balanceHud.incomeText, app.view.greenColor, prevValue, newValue, _balanceModel.incomePerMonth.GetNameLocKey(),

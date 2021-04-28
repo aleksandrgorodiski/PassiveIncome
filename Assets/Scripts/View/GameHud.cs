@@ -6,4 +6,6 @@ public class GameHud : MonoBehaviour
 {
     public TextMeshProUGUI dateText;
     public Image dateBar;
+    public TextMeshProUGUI expensesButtonText;
+
 }

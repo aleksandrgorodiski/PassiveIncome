@@ -22,7 +22,14 @@ public class GameView : GameElement
         CreateListAllMonth();
         _gameModel.ON_DATE_CHANGE += SetDateText;
         SetDateText();
+        SetButtonsText();
     }
+
+    void SetButtonsText()
+    {
+        gameHud.expensesButtonText.text = app.controller.localization.GetLocalizedValue("name_expenses");
+    }
+
 
     void SetDateText()
     {

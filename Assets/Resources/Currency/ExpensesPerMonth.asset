@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: expenses
   nameLocKey: name_expenses
-  defaultAmount: 13
+  defaultAmount: 12
   prefixLocKey: 
   suffixLocKey: name_per_time_unit
